@@ -10,12 +10,25 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app=express();
 
 app.use(express.json());
+const allowedOrigins = [
+  "http://localhost:5173", // for local testing
+  "https://expense-tracker-f-sepia.vercel.app", // your Vercel frontend URL
+];
+
 const corsOptions = {
-    origin: "http://localhost:5173", 
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  };
-  app.use(cors(corsOptions));
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 
 connectDB();
 
