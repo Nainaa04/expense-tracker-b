@@ -11,9 +11,11 @@ const app=express();
 
 app.use(express.json());
 const allowedOrigins = [
-  "http://localhost:5173", // for local testing
-  "https://expense-tracker-f-sepia.vercel.app", // your Vercel frontend URL
+  "http://localhost:5173",
+  "https://expense-tracker-f-sepia.vercel.app",
+  "https://expense-tracker-8e8razt4f-naina-singhs-projects.vercel.app" 
 ];
+
 
 const corsOptions = {
   origin: function (origin, callback) {
